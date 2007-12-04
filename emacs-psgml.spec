@@ -1,7 +1,7 @@
 %define	fname	psgml
 %define psgmldir %_datadir/emacs/site-lisp/psgml
 
-Summary:	A GNU Emacs major mode for editing SGML documents.
+Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
 Version:	1.2.5
 Release: 	7mdk
