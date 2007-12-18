@@ -5,7 +5,7 @@ Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
 Version:	1.2.5
 Release: 	 %mkrel 7
-Prereq: 	sgml-common
+Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
 URL:		http://www.lysator.liu.se/projects/about_psgml.html
