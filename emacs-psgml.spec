@@ -13,6 +13,7 @@ Source: 	ftp://ftp.lysator.liu.se/pub/sgml/psgml-%{version}.tar.bz2
 Group: 		Editors
 Obsoletes:	psgml
 Provides:	psgml = %version-%release
+Buildroot: 	%_tmppath/%{name}-root
 BuildArch: 	noarch
 BuildRequires:	emacs-bin
 
