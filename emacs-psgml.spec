@@ -4,7 +4,7 @@
 Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
 Version:	1.2.5
-Release: 	 %mkrel 10
+Release: 	 %mkrel 11
 Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
