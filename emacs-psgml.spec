@@ -1,10 +1,12 @@
 %define	fname	psgml
 %define psgmldir %_datadir/emacs/site-lisp/psgml
 
+%define debug_package %{nil}
+
 Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
 Version:	1.2.5
-Release: 	 %mkrel 11
+Release: 	12
 Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
@@ -13,7 +15,6 @@ Source: 	ftp://ftp.lysator.liu.se/pub/sgml/psgml-%{version}.tar.bz2
 Group: 		Editors
 Obsoletes:	psgml
 Provides:	psgml = %version-%release
-Buildroot: 	%_tmppath/%{name}-root
 BuildRequires:	emacs-bin
 
 %description
@@ -36,22 +37,20 @@ and killing; and also several commands for folding editing.
 make infodir=%{_infodir} psgmldir=%{psgmldir}
 
 %install
-rm -rf $RPM_BUILD_ROOT
+install -d %{buildroot}{%{psgmldir},%{_infodir},%{_libdir}/sgml/cdtd}
 
-install -d $RPM_BUILD_ROOT{%{psgmldir},%{_infodir},%{_libdir}/sgml/cdtd}
-
-%makeinstall psgmldir=$RPM_BUILD_ROOT%{psgmldir} lispdir=$RPM_BUILD_ROOT%{psgmldir}
+%makeinstall psgmldir=%{buildroot}%{psgmldir} lispdir=%{buildroot}%{psgmldir}
 
 # Why putting source files ??????
 #for i in $RPM_BUILD_ROOT%{psgmldir}/*.elc; do 
 #  rm -f $i
-#  cp `echo $(basename $i) | sed s/elc/el/` $RPM_BUILD_ROOT%{psgmldir}
+#  cp `echo $(basename $i) | sed s/elc/el/` %{buildroot}%{psgmldir}
 #done
 
-make install-info infodir=$RPM_BUILD_ROOT%{_infodir}
+make install-info infodir=%{buildroot}%{_infodir}
 
-install -d %buildroot%{_sysconfdir}/emacs/site-start.d
-cat << EOF > %buildroot%{_sysconfdir}/emacs/site-start.d/%{name}-init.el
+install -d %{buildroot}%{_sysconfdir}/emacs/site-start.d
+cat << EOF > %{buildroot}%{_sysconfdir}/emacs/site-start.d/%{name}-init.el
 (add-to-list 'load-path "%{psgmldir}")
 
 (autoload 'sgml-mode "psgml" "Major mode for editing SGML." t)
@@ -83,9 +82,6 @@ Resolution on Entity Management.")
 EOF
 
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %post
 %_install_info %{fname}.info
 
@@ -102,7 +98,79 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %_sysconfdir/emacs/site-start.d/%{name}-init.el
 %dir %{psgmldir}
 %{psgmldir}/*
-%dir %_libdir/sgml/cdtd
 %_libdir/sgml/cdtd
 %_infodir/*info*
 
+
+
+%changelog
+* Thu Dec 09 2010 Oden Eriksson <oeriksson@mandriva.com> 1.2.5-11mdv2011.0
++ Revision: 618052
+- the mass rebuild of 2010.0 packages
+
+* Thu Sep 03 2009 Thierry Vignaud <tv@mandriva.org> 1.2.5-10mdv2010.0
++ Revision: 428587
+- rebuild
+
+* Thu Aug 07 2008 Thierry Vignaud <tv@mandriva.org> 1.2.5-9mdv2009.0
++ Revision: 266618
+- rebuild early 2009.0 package (before pixel changes)
+
+* Sun May 11 2008 Nicolas LÃ©cureuil <nlecureuil@mandriva.com> 1.2.5-8mdv2009.0
++ Revision: 205714
+- Should not be noarch ed
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Tue Dec 18 2007 Thierry Vignaud <tv@mandriva.org> 1.2.5-7mdv2008.1
++ Revision: 132938
+- fix prereq
+- kill re-definition of %%buildroot on Pixel's request
+- use %%mkrel
+- fix summary-ended-with-dot
+- import emacs-psgml
+
+
+* Fri Apr 29 2005 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.2.5-7mdk
+- rebuild for new emacs
+
+* Tue May 20 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.2.5-6mdk
+- distlint fixes
+
+* Tue Jan 21 2003 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.2.5-5mdk
+- rebuild for latest emacs
+
+* Mon Jul 22 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.2.5-4mdk
+- build release
+
+* Fri Jun 21 2002 Götz Waschk <waschk@linux-mandrake.com> 1.2.5-3mdk
+- buildrequires emacs-bin
+
+* Sat Jun 01 2002 Yves Duret <yduret@mandrakesoft.com> 1.2.5-2mdk
+- renamed to emacs-psgml to be more coherent with our other emacs modes.
+- do not own %%_infodir in the rpm.
+- %%setup -q
+- spec clean up
+
+* Thu May 16 2002 Thierry Vignaud <tvignaud@mandrakesoft.com> 1.2.5-1mdk
+- new release
+- add %%clean section
+
+* Wed Jan 02 2002 Camille Begnis <camille@mandrakesoft.com> 1.2.4-1mdk
+- 1.2.4
+- removed patches
+
+* Fri Nov 16 2001 Camille Begnis <camille@mandrakesoft.com> 1.2.2-4mdk
+- Take patches from RedHat for DocBook>4.0 and emacs21
+- Improve highlighting
+- put again .elc files instead of .el 
+
+* Fri Aug 31 2001 Lenny Cartier <lenny@mandrakesoft.com>  1.2.2-3mdk
+- rebuild
+
+* Fri Jun 22 2001 Pixel <pixel@mandrakesoft.com> 1.2.2-2mdk
+- much cleanup (still doesn't work?)
+
+* Wed Jun 21 2001 Camille Begnis <camille@mandrakesoft.com> 1.2.2-1mdk  
+- Stole spec from RH
