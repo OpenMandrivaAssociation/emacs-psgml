@@ -6,7 +6,7 @@
 Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
 Version:	1.2.5
-Release: 	12
+Release: 	13
 Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
@@ -82,18 +82,7 @@ Resolution on Entity Management.")
 EOF
 
 
-%post
-%_install_info %{fname}.info
-
-%_install_info %{fname}-api.info
-
-%postun
-%_remove_install_info %{fname}.info
-
-%_remove_install_info %{fname}-api.info
-
 %files
-%defattr(-,root,root)
 %doc README.psgml
 %config(noreplace) %_sysconfdir/emacs/site-start.d/%{name}-init.el
 %dir %{psgmldir}
