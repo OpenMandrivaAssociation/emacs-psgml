@@ -5,13 +5,13 @@
 
 Summary:	A GNU Emacs major mode for editing SGML documents
 name:		emacs-%fname
-Version:	1.2.5
-Release: 	13
+Version:	1.3.2
+Release: 	1
 Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
 URL:		http://www.lysator.liu.se/projects/about_psgml.html
-Source: 	ftp://ftp.lysator.liu.se/pub/sgml/psgml-%{version}.tar.bz2
+Source: 	ftp://ftp.lysator.liu.se:21/pub/sgml/ALPHA/psgml-%{version}.tar.gz
 Group: 		Editors
 Obsoletes:	psgml
 Provides:	psgml = %version-%release
@@ -163,3 +163,4 @@ EOF
 
 * Wed Jun 21 2001 Camille Begnis <camille@mandrakesoft.com> 1.2.2-1mdk  
 - Stole spec from RH
+
