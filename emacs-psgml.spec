@@ -10,7 +10,7 @@ Release: 	2
 Requires: 	sgml-common
 Requires: 	emacs >= 20.7
 License: 	GPL
-URL:		http://www.lysator.liu.se/projects/about_psgml.html
+URL:		https://www.lysator.liu.se/projects/about_psgml.html
 Source: 	ftp://ftp.lysator.liu.se:21/pub/sgml/ALPHA/psgml-%{version}.tar.gz
 Group: 		Editors
 Obsoletes:	psgml
